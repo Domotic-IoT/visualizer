@@ -1,3 +1,14 @@
+////////////////////////////////////////////////////////////////////////
+// Dependencies
+let $ = require("jquery")
+
+////////////////////////////////////////////////////////////////////////
+// Shared variables
+var charts = []
+
+/**
+ * Configuration prototype.
+ */
 const chartConfigPrototype = {
     type: 'line',
     data: {
@@ -73,10 +84,19 @@ const chartConfigPrototype = {
     }
 }
 
+/**
+ * Creates a configuration from the prototype.
+ * @returns A new configuration
+ */
 function spawnConfiguration() {
     return JSON.parse(JSON.stringify(chartConfigPrototype))
 }
 
+/**
+ * Returns background color for a measure type
+ * @param {string} type Type of measure
+ * @returns Background color for a measure type
+ */
 function backgroundColor(type) {
     switch (type) {
         case "temperature":
@@ -92,6 +112,11 @@ function backgroundColor(type) {
     }
 }
 
+/**
+ * Returns border color for a measure type
+ * @param {string} type Type of measure
+ * @returns Border color for a measure type
+ */
 function borderColor(type) {
     switch (type) {
         case "temperature":
@@ -107,6 +132,11 @@ function borderColor(type) {
     }
 }
 
+/**
+ * Returns range for a measure type
+ * @param {string} type Type of measure
+ * @returns Range for a measure type
+ */
 function valuesRange(type) {
     switch (type) {
         case "temperature":
@@ -119,4 +149,54 @@ function valuesRange(type) {
         default:
             return null
     }
+}
+
+/**
+ * Returns a chart object.
+ * If chart does not exist, it is created and added to the DOM.
+ * @param {string} id Identifier of the chart
+ * @returns Chart object
+ */
+function getChart(id) {
+    if (!charts[id]) {
+        var canvasId = '#' + id + 'Chart'
+        var canvas = $('<canvas>').attr('id', canvasId)
+        var card = $('<div>').addClass('col-sm-12 col-lg-10 col-xl-6')
+        var container = $('#chartsContainer')
+        card.append(canvas)
+        container.append(card)
+        var canvasDom = document.getElementById(canvasId)
+        charts[id] = new Chart(canvasDom, spawnConfiguration())
+    }
+    return charts[id]
+}
+
+/**
+ * Removes every chart.
+ */
+function clear() {
+    $('#chartsContainer').empty()
+    charts = []
+}
+
+/**
+ * Format a title for a chart
+ * @param {string} title Title
+ * @returns Formatted title
+ */
+function formatTitle(title) {
+    return title
+        .split(/(?=[A-Z])/)
+        .map(title => title[0].toUpperCase() + title.slice(1).toLowerCase())
+        .join(" ")
+}
+
+module.exports = {
+    spawn: spawnConfiguration,
+    backgroundColor: backgroundColor,
+    borderColor: borderColor,
+    valuesRange: valuesRange,
+    get: getChart,
+    formatTitle: formatTitle,
+    clear: clear
 }

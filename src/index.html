@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>IoT Visualizer</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
     <!-- Navbar -->
@@ -24,19 +24,11 @@
             <div class="input-group me-2">
               <span class="input-group-text" id="basic-addon1">Time interval</span>
               <select id="timeIntervalInput" class="form-select me-2">
-                <option value="3600">1 hour</option>
-                <option value="14400">4 hour</option>
-                <option value="28800">8 hour</option>
-                <option value="43200">12 hour</option>
-                <option value="86400">1 day</option>
               </select>
             </div>
             <div class="input-group me-2">
               <span class="input-group-text" id="basic-addon1">Room</span>
               <select id="roomInput" class="form-select me-2">
-<option value="living">living</option>
-<option value="CoStuding2">CoStuding2</option>
-<option value="serra1">serra</option>
               </select>
             </div>
           </form>
@@ -57,10 +49,7 @@
       </div>
     </main>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
-    <script src="chart.js"></script>
-    <script src="visualization.js"></script>
+    <script>require('bootstrap')</script>
+    <script>require('./visualization')</script>
   </body>
 </html>

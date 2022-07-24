@@ -108,10 +108,10 @@ async function refresh(roomId, timeInterval) {
 /**
  * On document ready.
  */
-$(function() {
+$(async function() {
     $('#timeIntervalInput').on('change', loop)
     $('#roomInput').on('change', () => { ChartHelper.clear(); loop() })
-    displayRooms()
-    displayTimeIntervals()
+    await displayRooms()
+    await displayTimeIntervals()
     loop()
 })
